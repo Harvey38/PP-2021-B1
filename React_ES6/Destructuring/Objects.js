@@ -20,11 +20,11 @@ let person = {
 //////////////////////////////////////Undefined && default values
 
 
-var {name,country,job='jobs',anything='default value'}=person;
+var {name,country,job='jobs',anything:abcd='default value'}=person;
 console.log(name);
 console.log(country);
 console.log(job);
-console.log(anything);
+console.log(abcd);
 
 //////////////////////////////////////////Alias
 
