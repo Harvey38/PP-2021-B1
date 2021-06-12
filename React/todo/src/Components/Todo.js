@@ -24,6 +24,13 @@ export default class Todo extends Component {
             currTask:''
         })
     }
+    onDelete=(id)=>{
+        // console.log(this);
+        let nta = this.state.tasks.filter(task=>{
+            return task.id!=id;
+        })
+        this.setState({tasks:nta})
+    } 
     
     render() {
         console.log('render');
@@ -39,7 +46,8 @@ export default class Todo extends Component {
                             this.state.tasks.map(task=>(
                                 <li key={task.id}>
                                     <h1>{task.txt}</h1>
-                                    <button>Delete</button>
+                                    {/* <button onClick={()=>this.onDelete(task.id)}>Delete</button> */}
+                                    <button onClick={function(){this.onDelete(task.id)}.bind(this)}>Delete</button>
                                 </li>
                             ))
                         }
