@@ -35,25 +35,52 @@ export default class Todo extends Component {
     render() {
         console.log('render');
         return (
-            <div>
-                <div className='input-container'>
-                    <input onChange={this.handleChange} value={this.state.currTask} type='text'></input>
-                    <button onClick={this.onSubmit}>Add</button>
-                </div>
-                <div className='class-list'>
+            <>
+            <InputComponent value={this.state.currTask} onChange={this.handleChange} onSubmit={this.onSubmit} />
+            <TaskList tasks={this.state.tasks} onDelete={this.onDelete} />
+            </>
+        )
+    }
+}
+
+class InputComponent extends Component {
+    constructor(props)
+    {
+        super(props);
+    }
+    render() {
+        console.log(this.props);
+        return (
+            <div className='input-container'>
+            <input value={this.props.value} onChange={this.props.onChange} type='text'></input>
+            <button onClick={this.props.onSubmit} >Add</button>
+        </div>
+        )
+    }
+}
+
+
+class TaskList extends Component {
+    constructor(props)
+    {
+        super(props);
+    }
+    render() {
+        console.log(this.props);
+        return (
+            <div className='class-list'>
                     <ul>
                         {
-                            this.state.tasks.map(task=>(
+                            this.props.tasks.map(task=>(
                                 <li key={task.id}>
                                     <h1>{task.txt}</h1>
                                     {/* <button onClick={()=>this.onDelete(task.id)}>Delete</button> */}
-                                    <button onClick={function(){this.onDelete(task.id)}.bind(this)}>Delete</button>
+                                    <button onClick={()=>this.props.onDelete(task.id)} >Delete</button>
                                 </li>
                             ))
                         }
                     </ul>
                 </div>
-            </div>
         )
     }
 }
