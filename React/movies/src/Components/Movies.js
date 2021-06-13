@@ -5,8 +5,24 @@ export default class Movies extends Component {
     {
         super(props);
         this.state={
-            movies:getMovies()
+            movies:getMovies(),
+            currSearchText:'',
+            filterMovies:getMovies()
         }
+    }
+
+    onDelete=(id)=>{
+        let filterArr = this.state.movies.filter(movieObj=>{
+            return movieObj._id!=id
+        }
+        )
+        this.setState({
+            movies:filterArr
+        })
+    }
+    handleChange=(e)=>{
+        let val = e.target.value;
+      
     }
     render() {
         return (
@@ -16,7 +32,7 @@ export default class Movies extends Component {
                     <h1>Hello</h1>
                 </div>
                 <div className='col-9'>
-                   <input type='text'></input>
+                   <input onChange={this.handleChange} type='text'></input>
                    <table class="table">
   <thead>
     <tr>
@@ -36,7 +52,7 @@ export default class Movies extends Component {
               <td>{movieObj.genre.name}</td>
               <td>{movieObj.numberInStock}</td>
               <td>{movieObj.dailyRentalRate}</td>
-              <td><button type="button" class="btn btn-danger">Delete</button></td>  
+              <td><button onClick={()=>this.onDelete(movieObj._id)} type="button" class="btn btn-danger">Delete</button></td>  
             </tr>
         ))
     }
